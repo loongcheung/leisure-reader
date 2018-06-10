@@ -128,7 +128,7 @@ Page({
           }
         });
       },
-    })
+    });
     this.setData({
       STATIC_HOST: api.STATIC_HOST
     });

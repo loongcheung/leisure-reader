@@ -308,14 +308,30 @@ Page({
         });
       }
     });
-
-    wx.showLoading({
-      title: '点击呼出菜单',
-      mask: true
+    wx.getStorage({
+      key: 'isAlerted',
+      success: (res) => {
+        let data = res.data;
+        if (!data) {
+          wx.showModal({
+            title: '提示',
+            content: '点击呼出菜单',
+            success: (res) => {
+              if (res.confirm) {
+                wx.setStorage({
+                  key: 'isAlerted',
+                  value: true
+                });
+              }
+            }
+          });
+        }
+      }
     });
+
     setTimeout(() => {
-      wx.hideLoading()
+      wx.hideLoading();
       this.getBookSources(options.book_id);
     }, 2000);
   }
-})
+});
